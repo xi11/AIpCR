@@ -2,6 +2,7 @@
 logs/
 .log-runner.sh
 done
+._*.yaml
 
 # Mac-related
 .DS_Store
@@ -13,12 +14,15 @@ model/
 model/*.h5
 model/div1/
 model/div12/
+segformer-infer/model/
 
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+._*.py
+
 
 
 # PyInstaller
