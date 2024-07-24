@@ -3,6 +3,22 @@ from glob import glob
 import pandas as pd
 import shutil
 
+#copy tmeseg images as per a csv file
+src_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER1/artemis_lei/Discovery'
+dst_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/raw_pcr1pre0'
+if not os.path.exists(dst_path):
+    os.makedirs(dst_path)
+
+csv = pd.read_csv('/rsrch5/home/trans_mol_path/xpan7/pipelines/artemis/discovery_pcr1pre0.csv')
+for _, row in csv.iterrows():
+    file_name = row['ID'] + '.svs'
+    src_file = os.path.join(src_path, file_name)
+    dst_file = os.path.join(dst_path, file_name)
+    shutil.copy(src_file, dst_file)
+
+
+
+'''
 ###T6 data organization
 src_path = '/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/maskPng'
 dst_path = '/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/maskPng_test'
@@ -17,7 +33,6 @@ for filename in os.listdir(src_path):
 
 
 
-'''
 src_path = r'Z:\TIER2\barrett\til\MDA\1_cws_tiling'
 files = sorted(glob(os.path.join(src_path, '*.svs')))
 for file in files:
