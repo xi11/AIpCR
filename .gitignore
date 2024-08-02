@@ -8,6 +8,7 @@ done
 .DS_Store
 ._.DS_Store
 
+discovery*.csv
 
 # model checkpoints
 model/
