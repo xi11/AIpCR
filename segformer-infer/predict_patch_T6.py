@@ -265,13 +265,13 @@ class Patches:
 
 
 #segformer
-model_checkpoint = '/rsrch5/home/trans_mol_path/xpan7/pipelines/artemis/segformer-infer/model/mit-b3-finetunedBRCA-Artemis4Eval-s512-20x512'
+model_checkpoint = '/rsrch5/home/trans_mol_path/xpan7/pipelines/artemis/segformer-infer/model/mit-b3-finetunedBRCA-Artemis4Eval-discovery-s512-20x512'
 model = TFAutoModelForSemanticSegmentation.from_pretrained(model_checkpoint)
-save_dir = '/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/result_test_mit-b3-finetunedBRCA-Artemis4Eval-s512-20x512'
+save_dir = '/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/result_validation_mit-b3-finetunedBRCA-Artemis4Eval-s512-20x512'
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
 
-datapath = '/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/image_test'
+datapath = '/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/image_validation726'
 patch_size = 512
 imgs = sorted(glob(os.path.join(datapath, '*.png')))
 for im_f in imgs:

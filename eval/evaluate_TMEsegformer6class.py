@@ -30,8 +30,8 @@ color_mapping = {
     
 }
 nClasses = 6
-pred_mask = '/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/result_test_mit-b3-finetunedBRCA-Artemis4Eval-s512-20x512'
-gt_mask = '/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/maskPng_test'
+pred_mask = '/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/result_validation_mit-b3-finetunedBRCA-Artemis4Eval-s512-20x512'
+gt_mask = '/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/maskPng_validation'
 data_row = []
 
 files = sorted(glob(os.path.join(pred_mask, '*.png')))
@@ -68,4 +68,4 @@ for file in files:
     data_row.append(data)
 
 df = pd.DataFrame(data_row)
-df.to_csv('/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/tmesegformer_test4discovery11slide_size_pixel.csv', index=False)
+df.to_csv('/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/tmesegformer_test4validation15slide_size_pixel.csv', index=False)
