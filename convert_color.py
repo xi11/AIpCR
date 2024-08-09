@@ -3,13 +3,18 @@ from glob import glob
 import cv2
 import numpy as np
 
-src_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/validation_new2/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_cws512'
-dst_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/validation_new2/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_cws512_orng'
+src_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/gi_spore/pilot/tme/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_cws512'
+dst_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/gi_spore/pilot/tme/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_cws512_cyan'
 if not os.path.exists(dst_path):
     os.makedirs(dst_path)
 
-yellow = [0, 255, 255]  # Original color (R, G, B)
-orange = [0, 204, 255]  # New color (R, G, B)
+# for artemis ms
+#yellow = [0, 255, 255]  # Original color (B, G, R)
+#orange = [0, 204, 255]  # New color (B, G, R)
+    
+# for GI spore 
+cyan = [255, 255, 0]  # Original color (B, G, R)
+darkred = [0, 0, 128]   # New color (B, G, R)
 
 folders = sorted(glob(os.path.join(src_path, '*.svs')))
 for folder in folders:
@@ -26,6 +31,6 @@ for folder in folders:
         if not os.path.exists(dst_file):
             image = cv2.imread(file)
             #Create a mask where the pixel matches the yellow color
-            mask = np.all(image == yellow, axis=-1)
-            image[mask] = orange
+            mask = np.all(image == cyan, axis=-1)
+            image[mask] = darkred
             cv2.imwrite(dst_file, image)

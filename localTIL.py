@@ -72,8 +72,8 @@ def calculate_lymphocyte_density(image_path, csv_path, patch_save_path, patch_si
 image_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512_post_tumor15_900'
 csv_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/til/4_cell_class_segformerBRCAartemis/CellPos'
 results = []
-patch_size = 64
-stride = 64
+patch_size = 213 #The diameter of a core is around 1 mm
+stride = 213
 
 output_csv = f'/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/til/localTIL/localtil_{patch_size}_str{stride}pad.csv'
 patch_dst_dir = f'/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/patch{patch_size}_str{stride}'
