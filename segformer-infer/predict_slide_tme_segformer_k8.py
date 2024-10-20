@@ -12,8 +12,6 @@ import pandas as pd
 
 
 
-# %%
-# Loss function
 
 
 def to_categorical_mask(multi_label, nClasses):
@@ -24,16 +22,11 @@ def to_categorical_mask(multi_label, nClasses):
 
 
 #openCV: BGR
-class_colors = [(0, 0, 0), (0, 255, 0), (255, 0, 255), (0, 0, 128), (0, 255, 255), (0, 0, 255), (255, 0, 0)]
-class_colors4 = [(0, 0, 0), (255, 255, 0), (255, 255, 255), (128, 0, 0)]
-class_colors5 = [(0, 0, 0), (255, 0, 0), (255, 0, 255), (0, 0, 128), (0, 255, 255), (0, 0, 255)]
-class_colors2 = [(0, 0, 0), (255, 255, 255)]
-class_colors6 = [(0, 0, 0), (0, 255, 0), (255, 0, 255), (0, 0, 128), (255, 255, 0), (0, 128, 128)]
+
 class_colors_artemis = [(0, 0, 0), (0, 0, 128), (0, 255, 255), (255, 255, 0),(255, 0, 255),(0, 128, 128)]
-class_colors9 = [(0, 0, 0), (0, 0, 128), (0, 255, 255), (0, 0, 255),(255, 0, 255),(0, 128, 128), (255, 255, 0), (255, 0, 0) ,(0, 128, 0)] #(128, 0, 128)
 
 
-def get_colored_segmentation_image(seg_arr, n_classes, colors=class_colors5):
+def get_colored_segmentation_image(seg_arr, n_classes, colors=class_colors_artemis):
     output_height = seg_arr.shape[0]
     output_width = seg_arr.shape[1]
 

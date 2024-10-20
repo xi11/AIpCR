@@ -81,14 +81,12 @@ def annotate_image_with_class(image, points, colour, strength):
 
 
 if __name__ == "__main__":
-    results_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/til/4_cell_class_segformerBRCAonly/annotated_images' #output
-    tme_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetuned-tmeTCGA-60-lr00001-s512-20x768/mask_cws512' #mask_cws folder as input
+    results_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/til/4_cell_class_segformerBRCAartemis/annotated_images' #output
+    tme_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_cws512_orng' #mask_cws folder as input
     csv_classification_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/til/4_cell_class/csv'  #input
-    csv_correction_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/til/4_cell_class_segformerBRCAonly/csv' #output
+    csv_correction_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/til/4_cell_class_segformerBRCAartemis/csv' #output
     data_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/til/1_cws_tiling' #input
     file_name_pattern = '*.svs'
-    #IDs = ['D1056', 'D1059', 'D1070', 'D1071', 'D1073', 'D1075', 'D1077', 'D1082', 'D1083','D1116', 'D1413', 'D1415', 'D1418']
-    #for ID in IDs:
     files = sorted(glob(os.path.join(data_dir, file_name_pattern)))
     for file in files:
         sub_dir_name = os.path.basename(file)
@@ -99,5 +97,5 @@ if __name__ == "__main__":
                                    sub_dir_name=sub_dir_name,
                                    csv_classification_dir=csv_classification_dir,
                                    csv_correction_dir=csv_correction_dir,
-                                   color_code_path=os.path.join(os.path.dirname(__file__), 'colorcodes','HE_Fib_Lym_Tum_Others.csv')
+                                   color_code_path=os.path.join('/rsrch5/home/trans_mol_path/xpan7/pipelines/artemis', 'colorcodes','HE_Fib_Lym_Tum_Others.csv')
                                    )
