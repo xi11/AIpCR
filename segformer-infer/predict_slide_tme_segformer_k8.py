@@ -23,7 +23,7 @@ def to_categorical_mask(multi_label, nClasses):
 
 #openCV: BGR
 
-class_colors_artemis = [(0, 0, 0), (0, 0, 128), (0, 255, 255), (255, 255, 0),(255, 0, 255),(0, 128, 128)]
+class_colors_artemis = [(0, 0, 0), (0, 0, 128), (0, 204, 255), (255, 255, 0),(255, 0, 255),(0, 128, 128)]
 
 
 def get_colored_segmentation_image(seg_arr, n_classes, colors=class_colors_artemis):

@@ -33,8 +33,12 @@ def merge_csv_files(wsi_path, results_dir, output_csv):
             start_w = w * cws_w
 
             if os.path.isfile(os.path.join(results_dir, 'Da' + str(iter_tot_tiles) + '.csv')):
-                csv = pd.read_csv(os.path.join(results_dir, 'Da' + str(iter_tot_tiles) + '.csv'), usecols = ['V1', 'V2','V3', 'V6']) # v6 is the refined class
-                csv.columns = ['class', 'x', 'y', 'class2']
+                csv = pd.read_csv(os.path.join(results_dir, 'Da' + str(iter_tot_tiles) + '.csv'), usecols = ['V1', 'V2','V3', 'V6', 'Area_contour', 'Area_sum']) # v6 is the refined class
+                csv.rename(columns={
+                    'V1': 'class', 'V2': 'x', 'V3': 'y',
+                    'V6': 'class2', 'Area_contour': 'Area_contour',
+                    'Area_sum': 'Area_sum'}, inplace=True)
+                ##csv.columns = ['x', 'y', 'Area_contour', 'Area_sum', 'class', 'class2'] # the order has to be aligned with the original order
                 ##added to get tile loc
                 cell_num = len(csv.x)
                 csv['x_tile'] = csv.x
@@ -64,9 +68,9 @@ def merge_csv_files(wsi_path, results_dir, output_csv):
     cellPos.to_csv(output_csv, index=False)
 
 if __name__ == "__main__":
-    wsi_path_all = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/aitil_validation/arthemis/aitil_cpu_finetuned/1_cws_tiling'
-    results_dir_all = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/aitil_validation/arthemis/aitil_cpu_finetuned/4_cell_class_segformerBRCAartemis/csv'
-    cellPos = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/aitil_validation/arthemis/aitil_cpu_finetuned/4_cell_class_segformerBRCAartemis/CellPos'
+    wsi_path_all = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/til/1_cws_tiling'
+    results_dir_all = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/til/4_cell_class_segformerBRCAartemis/csv_area'
+    cellPos = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/til/4_cell_class_segformerBRCAartemis/CellPos_area'
     if not os.path.isdir(cellPos):
         os.makedirs(cellPos)
     files = sorted(glob(os.path.join(wsi_path_all, '*.svs')))
