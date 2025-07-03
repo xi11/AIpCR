@@ -1,17 +1,17 @@
 import pickle
 import numpy as np
-from tiles2tiff import tiles2tiff
+from tile2wsi import tiles2tiff
 import os
 from glob import glob
 
-def stitch_classification(classification_path, param_file, out_file, ext='png', jpeg_compression=True):
+def stitch_classification(classification_path, param_file, out_file, ext='png'):
     with open(param_file, 'rb') as p:
         param = pickle.load(p)
 
     image_size = np.round(np.array(param['slide_dimension']) / param['rescale']).astype(np.int32)
     tile_size = param['cws_read_size'].astype(np.int32)
 
-    tiles2tiff(classification_path, tile_size, image_size, out_file, ext=ext, jpeg_compression=jpeg_compression)
+    tiles2tiff(classification_path, tile_size, image_size, out_file, ext=ext)
 
 
 if __name__ == "__main__":
@@ -24,6 +24,7 @@ if __name__ == "__main__":
     files = sorted(glob(os.path.join(classification_dir, '*.svs')))
     for file in files:
         file_name = os.path.basename(file)
+        print(file_name)
         param_file = os.path.join(cws_dir, file_name, 'param.p')
         out_file = os.path.join(output_dir, file_name[:-4]+'.tif')
-        stitch_classification(file, param_file, out_file, ext='png', jpeg_compression=True)
+        stitch_classification(file, param_file, out_file, ext='png')

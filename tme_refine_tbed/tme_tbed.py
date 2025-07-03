@@ -3,9 +3,9 @@ from glob import glob
 import cv2
 import numpy as np
 
-tme_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512'
-tbed_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/tbed1536_ss1/maskLuadLusc_tmeArtemis_tumor7dilate'
-dst_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512_tumor7dilate_orng'
+tme_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512_orng'
+tbed_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/tbed1536_ss1/maskLuadLusc_tmeArtemis_tumor15dilate'
+dst_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512_tumor15dilate_orng'
 if not os.path.exists(dst_path):
     os.makedirs(dst_path)
 
