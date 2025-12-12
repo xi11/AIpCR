@@ -17,6 +17,8 @@ model/div1/
 model/div12/
 segformer-infer/model/
 
+# specific folders
+lei_csv/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -41,10 +41,10 @@ def cell_count(cell_csv_path, output_path, tmeSS1_path, file_name=None, classes=
 
 
 if __name__ == '__main__':
-    wsi_path_all = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/1_cws_tiling'
-    cell_pos_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/4_cell_class_segformerBRCAartemis/CellPos'
-    cell_score_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/4_cell_class_segformerBRCAartemis/CellScoreOth'
-    tme_seg_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512'
+    wsi_path_all = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_HER2/1_cws_tiling'
+    cell_pos_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_HER2/4_cell_class_segformerBRCAartemis/CellPos'
+    cell_score_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_HER2/4_cell_class_segformerBRCAartemis/CellScoreOth'
+    tme_seg_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_HER2/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512'
     if not os.path.isdir(cell_score_path):
         os.makedirs(cell_score_path)
     files = sorted(glob(os.path.join(wsi_path_all, '*.svs')))

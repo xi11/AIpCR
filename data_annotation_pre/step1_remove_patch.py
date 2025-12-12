@@ -3,18 +3,19 @@ import cv2
 from glob import glob
 import shutil
 import pandas as pd
+
 '''
 #Step0: using Qupath to generate patches, and move images and masks to two separate folders
-src_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch1_patch512_mppRaw/raw'
-dst_img = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch1_patch512_mppRaw/img'
-dst_mask = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch1_patch512_mppRaw/mask_color'
+src_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch2_patch512_mppRaw/raw'
+dst_img = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch2_patch512_mppRaw/img'
+dst_mask = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch2_patch512_mppRaw/mask_color'
 if not os.path.exists(dst_img):
     os.mkdir(dst_img)
 
 if not os.path.exists(dst_mask):
     os.mkdir(dst_mask)
 
-folders = sorted(glob(os.path.join(src_path, '3974*')))
+folders = sorted(glob(os.path.join(src_path, '39*')))
 for folder in folders:
     files = sorted(glob(os.path.join(folder, '*.png')))
     for file in files:
@@ -41,8 +42,8 @@ for patch in patches:
 
 
 #This is step1, to remove hard-cropped annotations, after which still need manually check
-src_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch1_patch512_mppRaw/mask_color'
-dst_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch1_patch512_mppRaw/mask_color_0.3'
+src_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch2_patch512_mppRaw/mask_color'
+dst_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch2_patch512_mppRaw/remove/mask_color_0.3'
 if not os.path.exists(dst_path):
     os.makedirs(dst_path)
 #patch_id = []
@@ -66,13 +67,13 @@ for patch in patches:
 
 
 ### remove image to hard crop
-src_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch1_patch512_mppRaw/img'
-ref_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch1_patch512_mppRaw/mask_color_0.05'
-dst_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch1_patch512_mppRaw/img_0.05'
+src_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch2_patch512_mppRaw/img'
+ref_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch2_patch512_mppRaw/remove/mask_color_0.05'
+dst_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch2_patch512_mppRaw/remove/mask_color_0.05'
 if not os.path.exists(dst_path):
     os.makedirs(dst_path)
 #patch_id = []
-patches = sorted(glob(os.path.join(ref_path, '*.png')))
+patches = sorted(glob(os.path.join(ref_path, '*labelled.png')))
 print(len(patches))
 for patch in patches:
     patch_name = os.path.basename(patch)[:-13]
@@ -82,7 +83,7 @@ for patch in patches:
 
 '''
 ###rename to 'mask_'
-src_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch1_patch512_mppRaw/mask_color'
+src_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/ping-cell-therapy/Liver_annotation/batch2_patch512_mppRaw/mask_color'
 
 #patch_id = []
 patches = sorted(glob(os.path.join(src_path, '*.png')))
