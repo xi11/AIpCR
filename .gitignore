@@ -16,9 +16,11 @@ model/*.h5
 model/div1/
 model/div12/
 segformer-infer/model/
+tmeseg_cv/model/
 
 # specific folders
 lei_csv/
+tmeseg_cv/five_folds
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

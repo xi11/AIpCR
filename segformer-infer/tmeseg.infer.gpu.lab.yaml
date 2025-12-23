@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: xpan7-labsegformer-infer2-{{index}}
+  name: xpan7-labsegformer-infer-{{index}}
   namespace: yn-gpu-workload
   labels:
       k8s-user: xpan7
@@ -33,10 +33,10 @@ spec:
           image: hpcharbor.mdanderson.edu/xpan7/dlenv:xpan7
           command: ["python", "/rsrch5/home/trans_mol_path/xpan7/pipelines/artemis/segformer-infer/main_tme_k8.py"]
           args: [
-            "-d", "/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TransNeo_Nature/1_cws_tiling",
-            "-o", "/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TransNeo_Nature/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_cws512",
-            "-s", "/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TransNeo_Nature/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512",
-            "-p", "*.svs", "-c", "-ps", "512", "-ins", "512", "-nC", "6", "-n", "{{index}}", "-sf", "0.0625", "-nJ", "12"
+            "-d", "/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/Yale_trastuzumab/1_cws_tiling",
+            "-o", "/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/Yale_trastuzumab/mit-b3-finetunedBRCA-Artemis1733-s512-20x512/mask_cws512",
+            "-s", "/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/Yale_trastuzumab/mit-b3-finetunedBRCA-Artemis1733-s512-20x512/mask_ss1512",
+            "-p", "*.svs", "-c", "-ps", "512", "-ins", "512", "-nC", "6", "-n", "{{index}}", "-sf", "0.0625", "-nJ", "8"
             ]
           workingDir: "/rsrch5/home/trans_mol_path/xpan7"
           env:

@@ -40,7 +40,7 @@ njob = args.nJob
 #input_size=args.input_size
 #nClass=args.nClass
 
-if len(files) <= 32:
+if len(files) <= 8:
         start_file = nfile
         end_file = nfile + 1
 else:

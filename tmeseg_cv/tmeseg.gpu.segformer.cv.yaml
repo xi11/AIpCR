@@ -1,0 +1,47 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: xpan7-gpu-tmesegcv-segformer
+  namespace: yn-gpu-workload
+  labels:
+      k8s-user: xpan7
+spec:
+  backoffLimit: 0
+  ttlSecondsAfterFinished: 60
+  template:
+    spec:
+      nodeSelector:
+        "nvidia.com/gpu.present": "true"
+      securityContext:
+        runAsUser: 290361
+        runAsGroup: 149100
+        fsGroup: 149100
+      containers:
+        - name: main
+          image: hpcharbor.mdanderson.edu/xpan7/dlenv:xpan7
+          command: ["python", "/rsrch5/home/trans_mol_path/xpan7/pipelines/artemis/tmeseg_cv/train_5cv.py"]
+          args: []
+          workingDir: "/rsrch5/home/trans_mol_path/xpan7"
+          env:
+          - name: HOME
+            value: "/rsrch5/home/trans_mol_path/xpan7"
+          volumeMounts:
+            - name: shm
+              mountPath: "/dev/shm"
+            - name: home
+              mountPath: "/rsrch5/home/trans_mol_path/xpan7"
+          resources:
+            limits:
+              nvidia.com/gpu: "1"
+          imagePullPolicy: IfNotPresent
+      volumes:
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: '21474836480'
+        - name: home
+          persistentVolumeClaim:
+            claimName: xpan7-gpu-home 
+      restartPolicy: Never
+

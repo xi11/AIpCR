@@ -10,13 +10,14 @@ import pandas as pd
 
 
 
-file_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER1/artemis_lei/Discovery'
-file = sorted(glob(os.path.join(file_path, '190*.svs')))
+file_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER1/anthracosis/CancerCell25/he_raw'
+file = sorted(glob(os.path.join(file_path, '*.tif')))
 count = 0
 data = []
 for file_name in file:
-    openslide_obj = openslide.OpenSlide(filename=file_name)
     print(file_name)
+    openslide_obj = openslide.OpenSlide(filename=file_name)
+    
     print(openslide_obj.properties)
     try:
         count = count+1
@@ -37,6 +38,6 @@ for file_name in file:
         KeyError
         print(os.path.basename(file_name))
 
-#df = pd.DataFrame(data)
-#output_file = os.path.join(file_path, 'impress_svs_metadata.csv')
-#df.to_csv(output_file, index=False)
+df = pd.DataFrame(data)
+output_file = os.path.join(file_path, 'CancerCell_metadata.csv')
+df.to_csv(output_file, index=False)

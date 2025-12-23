@@ -82,11 +82,11 @@ def annotate_image_with_class(image, points, colour, strength):
 
 
 if __name__ == "__main__":
-    results_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_HER2/4_cell_class_segformerBRCAartemis/annotated_images' #output
-    tme_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_HER2/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_cws512' #mask_cws folder as input
-    csv_classification_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_HER2/4_cell_class/csv'  #input
-    csv_correction_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_HER2/4_cell_class_segformerBRCAartemis/csv' #output
-    data_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_HER2/1_cws_tiling' #input
+    results_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/validation/til/4_cell_class_segformerBRCAartemis1733/annotated_images' #output
+    tme_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/validation/mit-b3-finetunedBRCA-Artemis1733-s512-20x512/mask_cws512' #mask_cws folder as input
+    csv_classification_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/validation/til/4_cell_class/csv'  #input
+    csv_correction_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/validation/til/4_cell_class_segformerBRCAartemis1733/csv' #output
+    data_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/validation/til/1_cws_tiling' #input
     file_name_pattern = '*.svs'
     files = sorted(glob(os.path.join(data_dir, file_name_pattern)))
     for file in files:

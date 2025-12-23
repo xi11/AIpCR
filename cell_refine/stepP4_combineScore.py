@@ -2,8 +2,8 @@ import os
 import pandas as pd
 
 # Specify the directory containing the CSV files
-input_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_HER2/4_cell_class_segformerBRCAartemis/CellScoreOth'
-ouput_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/IMPRESS_HER2/4_cell_class_segformerBRCAartemis'
+input_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TransNeo_Nature/4_cell_class_segformerBRCAartemis1733/CellScoreOth'
+ouput_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TransNeo_Nature/4_cell_class_segformerBRCAartemis1733'
 # Initialize an empty list to hold the dataframes
 df_list = []
 
