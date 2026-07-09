@@ -3,6 +3,7 @@ import pandas as pd
 import tensorflow as tf
 from pathlib import Path
 from transformers import TFAutoModelForSemanticSegmentation
+import cv2
 
 # -----------------------
 # CONFIG
@@ -12,7 +13,7 @@ fold_dir = Path("/rsrch5/home/trans_mol_path/xpan7/pipelines/artemis/tmeseg_cv/f
 img_root  = Path("/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/image")
 mask_root = Path("/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/maskPng")
 
-out_dir = fold_dir  # or Path("eval_outputs"); out_dir.mkdir(exist_ok=True)
+out_dir = Path("/rsrch5/home/trans_mol_path/xpan7/tmesegK8/patch512artemis/")
 
 image_size = 512
 batch_size = 8
@@ -30,6 +31,9 @@ id2label = {
 num_labels = len(id2label)
 BG = 0
 FG_CLASSES = list(range(1, num_labels))
+
+#openCV: BGR
+class_colors_artemis = [(0, 0, 0), (0, 0, 128), (0, 204, 255), (255, 255, 0),(255, 0, 255),(0, 128, 128)]
 
 # Point these to your saved fold model folders (edit paths if needed)
 # Example: model_dirs[1] is the folder created by save_pretrained for fold 1
@@ -145,6 +149,9 @@ summary_rows = []
 
 for fold in range(1, n_splits + 1):
     fold_csv = fold_dir / f"fold_{fold}.csv"
+    mask_out_path = out_dir/f"fold_{fold}"
+    mask_out_path.mkdir(parents=True, exist_ok=True)
+
     if not fold_csv.exists():
         raise FileNotFoundError(f"Missing fold file: {fold_csv}")
     if fold not in model_dirs or not model_dirs[fold].exists():
@@ -168,6 +175,25 @@ for fold in range(1, n_splits + 1):
     for xb, yb in test_ds:
         preds = predict_mask(model, xb, target_hw=(image_size, image_size))
         ytrue = yb.numpy().astype(np.int32)
+
+        # BGR color table (index = class id)
+        color_lut = np.array(class_colors_artemis, dtype=np.uint8)  # (C,3)
+
+        B = preds.shape[0]
+        for b in range(B):
+            if idx + b >= len(test_stems):
+                break
+
+            # preds[b]: (H,W) int -> (H,W,3) BGR
+            colored = color_lut[preds[b]]  # numpy advanced indexing
+
+            # output name follows your existing stem logic
+            out_name = f"{test_stems[idx + b]}.png"
+            out_path = mask_out_path / out_name
+
+            # cv2 expects BGR uint8 — already satisfied
+            cv2.imwrite(str(out_path), colored)
+
 
         B = preds.shape[0]
         for b in range(B):
@@ -208,8 +234,8 @@ for fold in range(1, n_splits + 1):
 
     # Save per-patch metrics
     per_patch_df = pd.DataFrame(per_patch_records)
-    out_patch_csv = out_dir / f"test_patch_metrics_fold{fold}.csv"
-    per_patch_df.to_csv(out_patch_csv, index=False)
+    out_patch_csv = fold_dir / f"test_patch_metrics_fold{fold}.csv"
+    #per_patch_df.to_csv(out_patch_csv, index=False)
 
     # Save fold confusion matrix
     cm_df = pd.DataFrame(
@@ -217,8 +243,8 @@ for fold in range(1, n_splits + 1):
         index=[f"true_{i}_{id2label[i]}" for i in range(num_labels)],
         columns=[f"pred_{i}_{id2label[i]}" for i in range(num_labels)],
     )
-    out_cm_csv = out_dir / f"confusion_matrix_fold{fold}.csv"
-    cm_df.to_csv(out_cm_csv)
+    out_cm_csv = fold_dir / f"confusion_matrix_fold{fold}.csv"
+    #cm_df.to_csv(out_cm_csv)
 
     # Fold-level summary metrics from aggregated cm (pixel-wise)
     fold_dice = dice_from_cm(fold_cm)
@@ -240,7 +266,7 @@ for fold in range(1, n_splits + 1):
     print(f"[Fold {fold}] saved: {out_patch_csv.name}, {out_cm_csv.name}")
 
 # Save overall CV summary
-summary_df = pd.DataFrame(summary_rows)
-out_summary = out_dir / "cv5_summary.csv"
-summary_df.to_csv(out_summary, index=False)
-print(f"Saved CV summary: {out_summary}")
+#summary_df = pd.DataFrame(summary_rows)
+#out_summary = fold_dir / "cv5_summary.csv"
+#summary_df.to_csv(out_summary, index=False)
+#print(f"Saved CV summary: {out_summary}")

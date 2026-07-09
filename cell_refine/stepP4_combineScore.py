@@ -2,8 +2,8 @@ import os
 import pandas as pd
 
 # Specify the directory containing the CSV files
-input_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TransNeo_Nature/4_cell_class_segformerBRCAartemis1733/CellScoreOth'
-ouput_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TransNeo_Nature/4_cell_class_segformerBRCAartemis1733'
+input_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TCGA_TNBC/4_cell_class_segformerBRCAartemis/CellScoreOth_tbed'
+ouput_dir = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TCGA_TNBC/4_cell_class_segformerBRCAartemis'
 # Initialize an empty list to hold the dataframes
 df_list = []
 
@@ -22,5 +22,5 @@ for filename in os.listdir(input_dir):
 combined_df = pd.concat(df_list, ignore_index=True)
 
 # Save the combined dataframe to a new CSV file
-combined_df.to_csv(os.path.join(ouput_dir,'combined_scoreOther_segformerBRCAartemis.csv'), index=False)
+combined_df.to_csv(os.path.join(ouput_dir,'combined_scoreOther_tbed_segformerBRCAartemis.csv'), index=False)
 

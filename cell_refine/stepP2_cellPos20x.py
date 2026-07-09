@@ -64,9 +64,9 @@ def merge_csv_files(wsi_path, results_dir, output_csv):
     cellPos.to_csv(output_csv, index=False)
 
 if __name__ == "__main__":
-    wsi_path_all = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TransNeo_Nature/1_cws_tiling'
-    results_dir_all = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TransNeo_Nature/4_cell_class_segformerBRCAartemis1733/csv'
-    cellPos = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TransNeo_Nature/4_cell_class_segformerBRCAartemis1733/CellPos'
+    wsi_path_all = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TCGA_TNBC/1_cws_tiling'
+    results_dir_all = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TCGA_TNBC/4_cell_class_segformerBRCAartemis/csv'
+    cellPos = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TCGA_TNBC/4_cell_class_segformerBRCAartemis/CellPos'
     if not os.path.isdir(cellPos):
         os.makedirs(cellPos)
     files = sorted(glob(os.path.join(wsi_path_all, '*.svs')))

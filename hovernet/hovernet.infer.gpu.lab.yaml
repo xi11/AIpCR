@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: xpan7-labsegformer-infer-tnbc-{{index}}
+  name: xpan7-hovernet-infer4-transneo{{index}}
   namespace: yn-gpu-workload
   labels:
       k8s-user: xpan7
@@ -17,6 +17,8 @@ spec:
         runAsUser: 290361
         runAsGroup: 1944271327
         fsGroup: 1944271327
+        supplementalGroups: 
+          - 1944303352
       volumes:
         - name: shm
           emptyDir:
@@ -28,15 +30,17 @@ spec:
         - name: home
           persistentVolumeClaim:
             claimName: xpan7-gpu-home
+        - name: program
+          persistentVolumeClaim:
+            claimName: xpan7-gpu-rsrch9-home-plm
       containers:
         - name: main
-          image: hpcharbor.mdanderson.edu/xpan7/dlenv:xpan7
-          command: ["python", "/rsrch5/home/trans_mol_path/xpan7/pipelines/artemis/segformer-infer/main_tme_k8.py"]
+          image: hpcharbor.mdanderson.edu/xpan7/tiatool:xpan7
+          command: ["python", "/rsrch5/home/trans_mol_path/xpan7/pipelines/artemis/hovernet/main_hovernet.py"]
           args: [
-            "-d", "/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TCGA_TNBC/1_cws_tiling",
-            "-o", "/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TCGA_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_cws512",
-            "-s", "/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TCGA_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512",
-            "-p", "*.svs", "-c", "-ps", "512", "-ins", "512", "-nC", "6", "-n", "{{index}}", "-sf", "0.0625", "-nJ", "10"
+            "-d", "/rsrch6/home/trans_mol_path/yuan_lab/TIER1/artemis_lei/TransNeo_Nature",
+            "-o", "/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/TransNeo_Nature/hovernet",
+            "-p", "73226*.svs", "-n", "{{index}}", "-nJ", "7"
             ]
           workingDir: "/rsrch5/home/trans_mol_path/xpan7"
           env:
@@ -47,6 +51,8 @@ spec:
               mountPath: "/rsrch6/home/trans_mol_path/yuan_lab"
             - name: home
               mountPath: "/rsrch5/home/trans_mol_path/xpan7"
+            - name: program
+              mountPath: "/rsrch9/home/plm/idso_fa1_pathology"
           resources:
             requests:
               nvidia.com/gpu: "1"
