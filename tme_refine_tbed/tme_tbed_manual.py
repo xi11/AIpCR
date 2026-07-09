@@ -6,8 +6,8 @@ from PIL import Image
 Image.MAX_IMAGE_PIXELS = None
 
 tme_path = '/rsrch6/home/trans_mol_path/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512'
-tbed_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/yutong-tnbc-pcr/discovery_pilot10/tumorBorder_manual/mask'
-dst_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/yutong-tnbc-pcr/discovery_pilot10/tme_tborder_mask'
+tbed_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/yutong-tnbc-pcr/discovery_pilot25/tumorBorder_manual/mask'
+dst_path = '/rsrch9/home/plm/idso_fa1_pathology/TIER2/yutong-tnbc-pcr/discovery_pilot25/tme_tborder_mask'
 if not os.path.exists(dst_path):
     os.makedirs(dst_path)
 
